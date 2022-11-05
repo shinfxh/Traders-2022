@@ -16,7 +16,7 @@ def test_trader(data):
         for stock in trades:
             pnl += trades[stock] * (next_prices[stock] - prices[stock])
         total += pnl
-    return pnl
+    return total
 
 class Trader:
     def __init__(self):
@@ -43,5 +43,12 @@ class Trader:
            #     trades['Stock2'] = 1000
           #  else:
             #    trades['Stock2'] = -1000
+
+        total = 0
+        for stock in trades:
+            total += np.abs(stock_prices[stock] * trades[stock])
+        scale = max_hold / total
+        for stock in trades:
+            trades[stock] *= scale
 
         return trades
